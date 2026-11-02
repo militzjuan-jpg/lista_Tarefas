@@ -18,15 +18,25 @@ opcao = menu_main()
 lista_De_Tarefas = []
 
 while True:
-    if opcao ==1:
-        tarefa = input("Digite a tarefa: ")
-        lista_De_Tarefas.append(tarefa)
-        menu_main()
-    elif opcao==2:
+    if opcao == 1:
+        tarefa = 0
+        while tarefa != "ok":
+            tarefa = input("Digite as tarefa e pressione enter entre cada uma(caso deseje finalizar digite 'ok'): ")
+            if tarefa == 'ok':
+                break
+            lista_De_Tarefas.append(tarefa)
+
+        lista_Enumerada = dict(enumerate(lista_De_Tarefas, start=1))
+        opcao = menu_main()
+    elif opcao== 2:
         pass
-    elif opcao==3:
-        pass
-    elif opcao==4:
+    elif opcao== 3:
+        for chave, valor in lista_Enumerada.items():
+            print(f"{chave}: {valor}")
+
+        input("Para continuar aperte enter: ")
+        opcao = menu_main()
+    elif opcao== 4:
         break
     else:
         print("Número digitado está incorreto! Por favor tente novamente.")
