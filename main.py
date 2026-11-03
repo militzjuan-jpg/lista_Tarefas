@@ -9,7 +9,8 @@ def menu_main():
           1. Adicionar tarefa
           2. Marcar tarefa como concluída
           3. Listar tarefas
-          4. Sair
+          4. Deletar items
+          5. Sair
 
     """)
     op = int(input("Digite a opção na qual deseja prosseguir: "))
@@ -53,7 +54,35 @@ while True:
 
         input("Para continuar aperte enter: ")
         opcao = menu_main()
-    elif opcao== 4:
+    elif opcao ==4:
+    
+        for chave, valor in lista_Enumerada.items():
+            print(f"{chave}: {valor}")
+
+        while True:
+            try:
+                item = int(input("digite o numero do item a ser deletado: "))
+                
+                if item not in lista_Enumerada.keys():
+                    print("Número digitado não consta na lista! tente novamente.")
+                    break
+                else:
+                    lista_Enumerada.pop(item)
+                
+                for chave, valor in lista_Enumerada.items():
+                    print(f"{chave}: {valor}")
+                
+                input("Pressione enter para continuar: ")
+                break
+                
+            except ValueError:
+                print("caracter incorreto! digite um numero válido: ")
+
+       
+
+        opcao = menu_main()
+        
+    elif opcao== 5:
         break
     else:
         print("Número digitado está incorreto! Por favor tente novamente.")
