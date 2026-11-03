@@ -1,3 +1,5 @@
+import emoji
+
 def menu_main():
     print("Gerenciador de tarefas \n")
     print("""
@@ -19,17 +21,32 @@ lista_De_Tarefas = []
 
 while True:
     if opcao == 1:
-        tarefa = 0
-        while tarefa != "ok":
+        
+        while True:
             tarefa = input("Digite as tarefa e pressione enter entre cada uma(caso deseje finalizar digite 'ok'): ")
-            if tarefa == 'ok':
+            if tarefa == 'ok' or tarefa == "'ok'":
                 break
             lista_De_Tarefas.append(tarefa)
 
         lista_Enumerada = dict(enumerate(lista_De_Tarefas, start=1))
         opcao = menu_main()
     elif opcao== 2:
-        pass
+        
+        for chave, valor in lista_Enumerada.items():
+            print(f"{chave}: {valor}")
+
+        while True:
+            item =input("Digite o numero da tarefa que deseja marcar como concluída(para finalizar digite 'ok'): ")
+            if item == "ok" or item=="'ok'":
+                break
+            else:
+                item = int(item)
+                lista_Enumerada[item] =lista_Enumerada[item] + " ✅"
+            
+               
+            
+
+        opcao = menu_main()
     elif opcao== 3:
         for chave, valor in lista_Enumerada.items():
             print(f"{chave}: {valor}")
