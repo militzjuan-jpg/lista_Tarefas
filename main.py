@@ -1,6 +1,6 @@
 import emoji
 
-def menu_main():
+def menu_main():         #menu principal
     print("Gerenciador de tarefas \n")
     print("""
           --------------------------------------- MENU -----------------------------------------
@@ -16,9 +16,9 @@ def menu_main():
     op = int(input("Digite a opção na qual deseja prosseguir: "))
     return op
 
-opcao = menu_main()
+opcao = menu_main() #primeira operação do programa, chamar o menu.
 
-lista_De_Tarefas = []
+lista_De_Tarefas = [] 
 
 while True:
     if opcao == 1:
@@ -69,6 +69,8 @@ while True:
                 else:
                     lista_Enumerada.pop(item)
                 
+                lista_Enumerada = {novo_index: valor for novo_index, valor in enumerate(lista_Enumerada.values(), start=1)}
+
                 for chave, valor in lista_Enumerada.items():
                     print(f"{chave}: {valor}")
                 
