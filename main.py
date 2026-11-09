@@ -1,4 +1,38 @@
 import emoji
+def criar_lista():
+    print("""
+        1.Criar nova lista de tarefas.
+        2.Abrir lista já existente.   
+    """)
+    try:
+        opcao_escolhida = int(input("digite a opção na qual deseja prosseguir: "))
+        if opcao_escolhida !=1 and opcao_escolhida !=2:
+            print("número incorreto! tente novamente.")
+            criar_lista()
+        elif opcao_escolhida ==2:
+            try:
+                lista = input("Digite o nome do arquivo (sem extensão): ")
+                nome_lista = f"{lista}.txt"
+                with open(nome_lista, "r", encoding="utf-8") as arquivo:
+                    conteudo = arquivo.read()
+                    print(conteudo)
+                    input("Pressione a tecla 'Enter' para continuar: ")
+                    return nome_lista
+            except FileNotFoundError:
+                print("Erro: O arquivo especificado não foi encontrado.")
+        else:
+            try:
+                titulo_lista = input("Digite o nome da sua lista (sem a extensão): ")
+                titulo_final = f"{titulo_lista}.txt"
+                with open(titulo_final, "x", encoding="utf-8") as arquivo:
+                    arquivo.write("")
+                    return titulo_final
+            except FileExistsError:
+                print("Erro! Este arquivo já existe.")
+                criar_lista()
+    except ValueError:
+        print("Valor incorreto! Digite um número.")
+        criar_lista()
 
 def menu_main():         #menu principal
     print("Gerenciador de tarefas \n")
@@ -17,12 +51,14 @@ def menu_main():         #menu principal
     op = int(input("Digite a opção na qual deseja prosseguir: "))
     return op
 
+lista = criar_lista()
+
 opcao = menu_main() #primeira operação do programa, chamar o menu.
 
 lista_De_Tarefas = [] 
 
 while True:
-    if opcao == 1:
+    if opcao == 1: #adicionar tarefas
         
         while True:
             tarefa = input("Digite as tarefa e pressione enter entre cada uma(caso deseje finalizar digite 'ok'): ") #se mantém no loop até o usário digitar 'ok', podendo colocar variás tarefas de uma vez sem voltar ao menu
@@ -32,7 +68,7 @@ while True:
 
         lista_Enumerada = dict(enumerate(lista_De_Tarefas, start=1)) #transforma a lista, com as tarefas colocadas pelo usuário, em um dicionário enumerado
         opcao = menu_main()
-    elif opcao == 2:
+    elif opcao == 2: #modificar tarefas
         for chave, valor in lista_Enumerada.items():
             print(f"{chave}: {valor}")
 
@@ -51,7 +87,7 @@ while True:
         except ValueError:
             print("valor incorreto! Digite um número. Você ira ser redirecionado ao menu noavamente.")
             opcao = menu_main()
-    elif opcao== 3:
+    elif opcao== 3: #marcar tarefas concluídas
         
         for chave, valor in lista_Enumerada.items():
             print(f"{chave}: {valor}")
@@ -68,13 +104,13 @@ while True:
                     print(f"{chave}: {valor}")
             
         opcao = menu_main()
-    elif opcao== 4:
+    elif opcao== 4: #listar tarefas
         for chave, valor in lista_Enumerada.items(): #lista os items do dicionário
             print(f"{chave}: {valor}")
 
         input("Para continuar aperte enter: ")
         opcao = menu_main()
-    elif opcao ==5:
+    elif opcao ==5: #deletar tarefas
     
         for chave, valor in lista_Enumerada.items():
             print(f"{chave}: {valor}")
