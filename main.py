@@ -7,10 +7,11 @@ def menu_main():         #menu principal
 
 
           1. Adicionar tarefa
-          2. Marcar tarefa como concluída
-          3. Listar tarefas
-          4. Deletar items
-          5. Sair
+          2. Modificar tarefa
+          3. Marcar tarefa como concluída
+          4. Listar tarefas
+          5. Deletar items
+          6. Sair
 
     """)
     op = int(input("Digite a opção na qual deseja prosseguir: "))
@@ -31,7 +32,26 @@ while True:
 
         lista_Enumerada = dict(enumerate(lista_De_Tarefas, start=1)) #transforma a lista, com as tarefas colocadas pelo usuário, em um dicionário enumerado
         opcao = menu_main()
-    elif opcao== 2:
+    elif opcao == 2:
+        for chave, valor in lista_Enumerada.items():
+            print(f"{chave}: {valor}")
+
+        try:
+            item = int(input("Digite o número do item que deseja modificar: "))
+            for chave in lista_Enumerada.keys():
+                if chave == item:
+                    item_modificado = input("digite a nova tarefa neste item: ")
+                    lista_Enumerada[chave]=item_modificado
+
+            for chave in lista_Enumerada.keys():
+                if chave != item:
+                    print("Valor não existe na lista! Você irá ser redirecionado ao menu.")
+                    opcao = menu_main()
+                      
+        except ValueError:
+            print("valor incorreto! Digite um número. Você ira ser redirecionado ao menu noavamente.")
+            opcao = menu_main()
+    elif opcao== 3:
         
         for chave, valor in lista_Enumerada.items():
             print(f"{chave}: {valor}")
@@ -48,13 +68,13 @@ while True:
                     print(f"{chave}: {valor}")
             
         opcao = menu_main()
-    elif opcao== 3:
+    elif opcao== 4:
         for chave, valor in lista_Enumerada.items(): #lista os items do dicionário
             print(f"{chave}: {valor}")
 
         input("Para continuar aperte enter: ")
         opcao = menu_main()
-    elif opcao ==4:
+    elif opcao ==5:
     
         for chave, valor in lista_Enumerada.items():
             print(f"{chave}: {valor}")
@@ -84,7 +104,7 @@ while True:
 
         opcao = menu_main()
         
-    elif opcao== 5: #encerra o loop e o programa
+    elif opcao== 6: #encerra o loop e o programa
         break
     else: #se o numero foi digitado incorretamente, chama o menu novamente para corrigir o erro.
         print("Número digitado está incorreto! Por favor tente novamente.")
